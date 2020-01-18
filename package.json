@@ -1,0 +1,25 @@
+{
+  "name": "-duplom-shop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "concurrently": "^5.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "client": "npm start --prefix client",
+    "server": "npm run start --prefix server",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/denyk443245235/Duplom-shop.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/denyk443245235/Duplom-shop/issues"
+  },
+  "homepage": "https://github.com/denyk443245235/Duplom-shop#readme"
+}
