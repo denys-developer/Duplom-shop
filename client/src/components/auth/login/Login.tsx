@@ -1,46 +1,29 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Box from '@material-ui/core/Box'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import Paper from '@material-ui/core/Paper'
+import { useForm } from 'react-hook-form';
+import http from '../HttpAuth'
+import {useStyles} from './style';
 
-const useStyles = makeStyles(theme => ({
-    layout: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center'
-    },
-    paper: {
-        padding: theme.spacing(2),
-        [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
-            marginTop: theme.spacing(8),
-            padding: `${theme.spacing(6)}px ${theme.spacing(4)}px`
-        }
-    },
-    submit: {
-        margin: theme.spacing(3, 0, 3)
-    },
-    form: {
-        width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(1)
-    },
-    buttonProgress: {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        marginTop: -12,
-        marginLeft: -12
-    }
-}))
+
+interface AuthDate {
+    email: String;
+    password:String;
+}
 
 const Login = () => {
     const classes = useStyles({})
+
+    const { register, handleSubmit, watch, errors } = useForm()
     const [formData, setFormData] = React.useState({ email: '', password: '' })
     const [submitting, setSubmitting] = React.useState(false)
-
+    const onSubmit = (date: any) => {
+        http.login(date);
+    }
     return (
         <main className={classes.layout}>
             <Paper className={classes.paper} elevation={2}>
@@ -57,8 +40,10 @@ const Login = () => {
                         Log in to your account dashboard
           </Typography>
                 </Box>
-                <form method="post" className={classes.form} noValidate>
+                <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
                     <TextField
+                        type="input"
+                        inputRef={register({ required: true, pattern: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ })}
                         margin="normal"
                         required
                         fullWidth
@@ -71,12 +56,13 @@ const Login = () => {
                         onChange={e => setFormData({ ...formData, email: e.target.value })}
                     />
                     <TextField
+                        name="password"
+                        inputRef={register({ required: true, maxLength: 8 })}
                         margin="normal"
                         required
                         fullWidth
-                        name="password"
                         label="Password"
-                        type="password"
+                        type="input"
                         id="password"
                         autoComplete="current-password"
                         defaultValue={formData.password}
@@ -84,6 +70,7 @@ const Login = () => {
                     />
                     <Box mb={6}>
                         <Button
+                            name="password"
                             disabled={submitting}
                             type="submit"
                             fullWidth
