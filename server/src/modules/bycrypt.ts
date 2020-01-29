@@ -1,5 +1,11 @@
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+interface UserDate {
+    email: string;
+    password: string;
+    firstName?: string;
+    lastName?: string;
+}
 class HashPassword {
     createHash(password: string) {
         return new Promise<string>((resolve, reject) => {
@@ -10,9 +16,9 @@ class HashPassword {
             });
         })
     }
-    checkPassword(password: string, hash: string) {
+    checkPassword(password: string, user: UserDate) {
         return new Promise<boolean>((resolve, reject) => {
-            bcrypt.compare(password, hash, function (err: any, res: any) {
+            bcrypt.compare(password, user.password, function (err: any, res: any) {
                 if (res)
                     resolve(true);
                 else

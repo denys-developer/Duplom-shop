@@ -7,12 +7,13 @@ import TextField from '@material-ui/core/TextField'
 import Paper from '@material-ui/core/Paper'
 import { useForm } from 'react-hook-form';
 import http from '../HttpAuth'
-import {useStyles} from './style';
+import { useStyles } from './style';
+import { Redirect } from 'react-router-dom'
 
 
 interface AuthDate {
     email: String;
-    password:String;
+    password: String;
 }
 
 const Login = () => {
@@ -21,8 +22,19 @@ const Login = () => {
     const { register, handleSubmit, watch, errors } = useForm()
     const [formData, setFormData] = React.useState({ email: '', password: '' })
     const [submitting, setSubmitting] = React.useState(false)
+    const [authState, setAuthState] = React.useState(false);
+
     const onSubmit = (date: any) => {
-        http.login(date);
+        http.login(date).then((status) => {
+            if (status) {
+                setAuthState(status);
+            }
+        });
+    }
+    if (authState) {
+        return (
+            <Redirect from="/login" to="shop" />
+        )
     }
     return (
         <main className={classes.layout}>
@@ -90,4 +102,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default Login;
