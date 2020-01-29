@@ -25,6 +25,7 @@ export default function Header() {
                         News
           </Typography>
                     <MenuList style={{ display: 'flex' }}>
+                        <MenuItem component={Link} to='/shop'>Shop</MenuItem>
                         <MenuItem component={Link} to='/login'>Login</MenuItem>
                         <MenuItem component={Link} to='/register'>Register</MenuItem>
                     </MenuList>

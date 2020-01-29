@@ -1,15 +1,14 @@
-import { Redirect } from "react-router-dom";
 
 const axios = require('axios').default;
-let url = "http://localhost:8080/";
+let url = "http://localhost:8080/user";
 interface Date {
     email: String,
     password: String
 }
-class HttpAuth {
+class httpAuth {
     login(data: Date) {
         return new Promise<boolean>((resolve, reject) => {
-            axios.post(url + 'user/login', data)
+            axios.post(url + '/login', data)
                 .then((response: any) => {
                     resolve(response.data);
                 })
@@ -17,11 +16,11 @@ class HttpAuth {
 
     }
     register(data: Date) {
-        axios.post(url + 'user/register', data)
+        axios.post(url + '/register', data)
             .then((response: any) => {
                 console.log(response);
             })
     }
 }
-const http = new HttpAuth();
+const http = new httpAuth();
 export default http;

@@ -28,7 +28,7 @@ export default class App extends Component {
                         <Shop />
                     </Route>
                 </Switch>
-                <Redirect from="/" to="login" />
+                <Redirect from="/" to="shop" />
 
             </>
 

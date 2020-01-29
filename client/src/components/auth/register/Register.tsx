@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import { CircularProgress } from '@material-ui/core'
 import {useStyles} from './style';
-import http from '../HttpAuth'
+import http from '../HttpAuth';
 import { useForm } from 'react-hook-form';
 
 
