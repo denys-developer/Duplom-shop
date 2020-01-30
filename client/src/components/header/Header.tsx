@@ -22,12 +22,13 @@ export default function Header() {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
-                        News
+                    <MenuItem component={Link} to='/shop'>Shop</MenuItem>
           </Typography>
                     <MenuList style={{ display: 'flex' }}>
-                        <MenuItem component={Link} to='/shop'>Shop</MenuItem>
                         <MenuItem component={Link} to='/login'>Login</MenuItem>
                         <MenuItem component={Link} to='/register'>Register</MenuItem>
+                        <MenuItem component={Link} to='/admin-panel'>Admin panel</MenuItem>
+
                     </MenuList>
                 </Toolbar>
 

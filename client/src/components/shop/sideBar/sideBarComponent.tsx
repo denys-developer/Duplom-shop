@@ -7,19 +7,17 @@ import { observable, action } from "mobx";
 import { observer } from "mobx-react";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Store from '../store';
-import SlideBar from './slideBar';
 
+import Card from '@material-ui/core/Card';
+import './style.css'
 interface Props {
     store: Store;
 }
-
 @observer
 export default class SideBarComponent extends React.Component<Props>{
-    slideeBar: SlideBar;
     @observable categories: [JSX.Element] | undefined;
     constructor(props: Props) {
         super(props);
-        this.slideeBar = this.props.store.slideeBar;
     }
     componentDidMount() {
         http.categories().then((response: any) => {
@@ -27,10 +25,16 @@ export default class SideBarComponent extends React.Component<Props>{
         })
     }
     @action
+    selectCategory(id: number) {
+        this.props.store.categoryId = id;
+    }
+    @action
     setCategories(date: any) {
         this.categories = date.map((category: any, index: number) => {
             return (
-                <MenuItem key={index} >{category.name}</MenuItem>
+                <MenuItem key={index} onClick={() => {
+                    this.selectCategory(category._id)
+                }}>{category.name}</MenuItem>
             )
         })
 
@@ -38,9 +42,10 @@ export default class SideBarComponent extends React.Component<Props>{
     render() {
         if (this.categories) {
             return (
-                <>
+                <Card className="sideBar">
                     {this.categories}
-                </>
+                </Card>
+
             )
         }
         else {

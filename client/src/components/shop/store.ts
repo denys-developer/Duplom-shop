@@ -1,7 +1,13 @@
-import SlideBar from './sideBar/slideBar';
+import { observable, computed, action } from "mobx";
+
 export default class Store {
-    slideeBar: SlideBar;
+    @observable activeCategoryId: number = 0;
     constructor() {
-        this.slideeBar = new SlideBar();
+    }
+    get categoryId() {
+        return this.activeCategoryId;
+    }
+    set categoryId(id: number) {
+        this.activeCategoryId = id;
     }
 }
