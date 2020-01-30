@@ -1,4 +1,11 @@
 import React from 'react';
-export default class Card extends React.Component{
-    
+
+export default class Card extends React.Component {
+ 
+    render() {
+
+        return (
+            <h2>всів</h2>
+        )
+    }
 }

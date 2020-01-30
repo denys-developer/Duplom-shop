@@ -11,9 +11,12 @@ import Login from './auth/login/Login';
 import Register from './auth/register/Register';
 import Shop from './shop/Shop';
 import AdminPanel from './shop/admin_panel/AdminPanel';
-
+import Card from './shop/product-card/Card';
 
 export default class App extends Component {
+    constructor(props: Readonly<{}>) {
+        super(props);
+    }
     render() {
         return (
             <>
@@ -31,6 +34,11 @@ export default class App extends Component {
                     <Route path="/admin-panel">
                         <AdminPanel />
                     </Route>
+                    <Route path="/admin-panel">
+                        <AdminPanel />
+                    </Route>
+                    <Route path="/shop/product-card/:id" component={Card}/>
+               
                 </Switch>
                 <Redirect from="/" to="shop" />
 

@@ -1,0 +1,35 @@
+.card{
+    width:20%;
+    padding: 10px;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    height: 90vh;
+    overflow: scroll;
+    padding: 20px;
+}
+.media{
+    height: 200px;
+}
+.name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.coast{
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+}
+.action_area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -11,7 +11,7 @@ export default class Shop extends React.Component {
     }
     render() {
         return (
-            <div style={{display:'flex'}}>
+            <div style={{display:'flex',height:"90vh"}}>
                 <SideBarComponent store={this.store} />
                 <Catalog store={this.store} />
             </div>

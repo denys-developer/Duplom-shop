@@ -9,4 +9,9 @@ export const useStyles = makeStyles(theme => ({
     title: {
         flexGrow: 1,
     },
+    container: {
+        height: '10vh',
+        display: "flex",
+        justifyContent: "center"
+    }
 }));

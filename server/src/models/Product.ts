@@ -4,5 +4,5 @@ const productScheme = new mongoose.Schema({
     coast: String,
     img: String,
 });
-const Product = mongoose.model("Users", productScheme);
+const Product = mongoose.model("Products", productScheme);
 export = Product;

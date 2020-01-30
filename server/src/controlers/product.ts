@@ -1,5 +1,5 @@
 import CategoryDb from '../models/Categories';
-// import Product from '../models/Product'
+import ProductDb from '../models/Product';
 class Product {
     get categories() {
         return new Promise((resolve, reject) => {
@@ -13,9 +13,15 @@ class Product {
             }
         })
     }
-    get products(){
-        return new Promise((resolve,reject)=>{
-
+     getAllProducts() {
+        return new Promise((resolve, reject) => {
+            try {
+                ProductDb.find({}, (err, products) => {
+                    resolve(products);
+                })
+            } catch (err) {
+                resolve(err);
+            }
         })
     }
 }
