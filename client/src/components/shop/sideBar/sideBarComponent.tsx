@@ -13,11 +13,15 @@ import './style.css'
 interface Props {
     store: Store;
 }
+
 @observer
 export default class SideBarComponent extends React.Component<Props>{
+
     @observable categories: [JSX.Element] | undefined;
+    
     constructor(props: Props) {
         super(props);
+
     }
     componentDidMount() {
         http.categories().then((response: any) => {

@@ -1,8 +1,6 @@
 import React from 'react';
-export default class AdminPanel extends React.Component{
-    render(){
-        return(
-            <h1>Admin Pannel</h1>
-        )
-    }
+export default function AdminPanel() {
+    return (
+        <h1>Admin Pannel</h1>
+    )
 }

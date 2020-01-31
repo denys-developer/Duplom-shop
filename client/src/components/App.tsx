@@ -12,38 +12,31 @@ import Register from './auth/register/Register';
 import Shop from './shop/Shop';
 import AdminPanel from './shop/admin_panel/AdminPanel';
 import Card from './shop/product-card/Card';
+export default function App() {
+    return (
+        <>
+            <Header />
+            <Switch>
+                <Route path="/login">
+                    <Login />
+                </Route>
+                <Route path="/register">
+                    <Register />
+                </Route>
+                <Route exact path="/shop">
+                    <Shop />
+                </Route>
+                <Route path="/admin-panel">
+                    <AdminPanel />
+                </Route>
 
-export default class App extends Component {
-    constructor(props: Readonly<{}>) {
-        super(props);
-    }
-    render() {
-        return (
-            <>
-                <Header />
-                <Switch>
-                    <Route path="/login">
-                        <Login />
-                    </Route>
-                    <Route path="/register">
-                        <Register />
-                    </Route>
-                    <Route path="/shop">
-                        <Shop />
-                    </Route>
-                    <Route path="/admin-panel">
-                        <AdminPanel />
-                    </Route>
-                    <Route path="/admin-panel">
-                        <AdminPanel />
-                    </Route>
-                    <Route path="/shop/product-card/:id" component={Card}/>
-               
-                </Switch>
-                <Redirect from="/" to="shop" />
+                <Route path="/shop/:id" component={Card} />
 
-            </>
+            </Switch>
+            <Redirect from="/" to="shop" />
 
-        )
-    }
+        </>
+
+    )
+
 }

@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Store from '../store';
-import { computed, observable, action } from 'mobx';
-import { observer } from 'mobx-react';
+import { observer, } from 'mobx-react';
 import http from '../HttpProduct';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Card from '@material-ui/core/Card';
@@ -13,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import './style.css';
 import { Redirect } from 'react-router-dom';
+
 interface Props {
     store: Store;
 }
@@ -22,23 +22,15 @@ interface Product {
     img: string;
     _id: string;
 }
-@observer
-export default class Catalog extends React.Component<Props>{
-    @observable products?: Array<JSX.Element>;
-    @observable selectedProductId: string | undefined;
-    constructor(props: Props) {
-        super(props);
-    }
-    @action
-    selectProduct(id: string) {
-        this.selectedProductId = id;
-    }
-    componentWillMount() {
+export const Catalog = observer((props: Props) => {
+    const [selectId, selectProduct] = useState('');
+    const [products, setProducts] = useState([]);
+    useEffect(() => {
         http.products().then((data: any) => {
-            this.products = data.map((product: Product, index: number) => {
+            let mas = data.map((product: Product, index: number) => {
                 return (
                     <Card className='card' onClick={() => {
-                        this.selectProduct(product._id);
+                        selectProduct(product._id);
                     }}>
                         <CardActionArea className="action_area">
                             <img src={product.img} alt="" className="media" />
@@ -63,30 +55,26 @@ export default class Catalog extends React.Component<Props>{
                 );
 
             });
+            setProducts(mas);
         })
+    })
+    let categoryId = props.store.activeCategoryId;
+    if (selectId) {
+        return (
+            <Redirect from='shop' to={{ pathname: `/shop/:${selectId}` }} />
+        )
+    };
+    if (products) {
+        return (
+            <div className="container">
+                {products}
+            </div>
+        )
     }
-    componentWillUpdate() {
+    else {
+        return (
+            <CircularProgress color="secondary" />
+        )
+    }
 
-    }
-    render() {
-
-        let categoryId = this.props.store.activeCategoryId;
-        if (this.selectedProductId) {
-            return (
-                <Redirect  to={{pathname:`/shop/product-card/:${this.selectedProductId}`}} />
-            )
-        }
-        if (this.products) {
-            return (
-                <div className="container">
-                    {this.products}
-                </div>
-            )
-        }
-        else {
-            return (
-                <CircularProgress color="secondary" />
-            )
-        }
-    }
-}
+});

@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import { CircularProgress } from '@material-ui/core'
-import {useStyles} from './style';
+import { useStyles } from './style';
 import http from '../HttpAuth';
 import { useForm } from 'react-hook-form';
 
@@ -22,7 +22,7 @@ const Register = () => {
   const { register, handleSubmit, watch, errors } = useForm()
   const onSubmit = (date: any) => {
     http.register(date);
-}
+  }
 
   return (
     <main className={classes.layout}>
@@ -43,7 +43,7 @@ const Register = () => {
             required
             fullWidth
             id="firstName"
-            inputRef={register({ required: true})}
+            inputRef={register({ required: true })}
             label="First Name"
             name="firstName"
             autoComplete="fname"
@@ -56,7 +56,7 @@ const Register = () => {
             required
             fullWidth
             id="lastName"
-            inputRef={register({ required: true})}
+            inputRef={register({ required: true })}
             label="Last Name"
             name="lastName"
             autoComplete="lname"
