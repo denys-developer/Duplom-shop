@@ -22,46 +22,49 @@ interface Product {
     img: string;
     _id: string;
 }
-export const Catalog = (props: Props) => {
+export const Catalog = observer((props: Props) => {
     const [selectId, selectProduct] = useState('');
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        http.products().then((data: any) => {
-            for (const category in data[0]) {
-                let productObj = data[0][category];
-                let mas = productObj.map((product: any, index: number) => {
-                    return (
-                        <Card className='card' onClick={() => {
-                            selectProduct(product._id);
-                        }}>
-                            <CardActionArea className="action_area">
-                                <img src={product.img} alt="" className="media" />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="h2" className="name">
-                                        {product.name}
-                                    </Typography>
-                                    <Typography variant="body2" color="textSecondary" component="p" className="coast">
-                                        <h1>{product.coast}</h1>
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                            <CardActions>
-                                <Button size="small" color="primary">
-                                    Share
-                      </Button>
-                                <Button size="small" color="primary">
-                                    Learn More
-                      </Button>
-                            </CardActions>
-                        </Card>
-                    );
+       
+        // props.store.getProducts().then((data: any) => {
+        //     for (const category in data) {
+        //         let productObj = data[category];
+        //         let mas = productObj.map((product: any, index: number) => {
+        //             return (
+        //                 <Card key={index} className='card' onClick={() => {
+        //                     selectProduct(product._id);
+        //                 }}>
+        //                     <CardActionArea className="action_area">
+        //                         <img src={product.img} alt="" className="media" />
+        //                         <CardContent>
+        //                             <Typography gutterBottom variant="h5" component="h2" className="name">
+        //                                 {product.name}
+        //                             </Typography>
+        //                             <Typography variant="body2" color="textSecondary" component="p" className="coast">
+        //                                 <h1>{product.coast}</h1>
+        //                             </Typography>
+        //                         </CardContent>
+        //                     </CardActionArea>
+        //                     <CardActions>
+        //                         <Button size="small" color="primary">
+        //                             Share
+        //               </Button>
+        //                         <Button size="small" color="primary">
+        //                             Learn More
+        //               </Button>
+        //                     </CardActions>
+        //                 </Card>
+        //             );
 
-                });
-                setProducts(mas);
-            }
-        })
+        //         });
+        //         setProducts(mas);
+        //     }
+        // })
     })
     let categoryId = props.store.activeCategoryId;
+    let a = props.store.products;
+    console.log(a);
     if (selectId) {
         return (
             <Redirect from='shop' to={{ pathname: `/shop/${selectId}` }} />
@@ -80,4 +83,4 @@ export const Catalog = (props: Props) => {
         )
     }
 
-};
+});

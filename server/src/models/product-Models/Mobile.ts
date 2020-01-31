@@ -1,4 +1,4 @@
-import mongoose from './mongoose';
+import mongoose from '../mongoose';
 const phonesScheme = new mongoose.Schema({
     collectionName:String,
     name:String,
@@ -11,5 +11,5 @@ const phonesScheme = new mongoose.Schema({
     cpu: String,
     color: String
 });
-const Phones = mongoose.model("Phones", phonesScheme);
+const Phones = mongoose.model("Phones", phonesScheme,'phones');
 export = Phones;

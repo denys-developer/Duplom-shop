@@ -1,5 +1,6 @@
 import CategoryDb from '../models/Categories';
 import ProductDb from '../models/Product';
+import { catalog } from '../models/catalog';
 class Product {
     get categories() {
         return new Promise((resolve, reject) => {
@@ -17,8 +18,8 @@ class Product {
         return new Promise((resolve, reject) => {
             try {
 
-                ProductDb.find({}, { _id: false }).populate('phones')
-                    .exec((err, products) => {
+                ProductDb.findOne({}, { _id: false }).populate(['laptop','phones'])
+                    .exec((err, products) => {              
                         resolve(products);
                     })
             } catch (err) {
