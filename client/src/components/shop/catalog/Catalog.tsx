@@ -22,46 +22,49 @@ interface Product {
     img: string;
     _id: string;
 }
-export const Catalog = observer((props: Props) => {
+export const Catalog = (props: Props) => {
     const [selectId, selectProduct] = useState('');
     const [products, setProducts] = useState([]);
     useEffect(() => {
         http.products().then((data: any) => {
-            let mas = data.map((product: Product, index: number) => {
-                return (
-                    <Card className='card' onClick={() => {
-                        selectProduct(product._id);
-                    }}>
-                        <CardActionArea className="action_area">
-                            <img src={product.img} alt="" className="media" />
-                            <CardContent>
-                                <Typography gutterBottom variant="h5" component="h2" className="name">
-                                    {product.name}
-                                </Typography>
-                                <Typography variant="body2" color="textSecondary" component="p" className="coast">
-                                    <h1>{product.coast}</h1>
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                        <CardActions>
-                            <Button size="small" color="primary">
-                                Share
-                  </Button>
-                            <Button size="small" color="primary">
-                                Learn More
-                  </Button>
-                        </CardActions>
-                    </Card>
-                );
+            for (const category in data[0]) {
+                let productObj = data[0][category];
+                let mas = productObj.map((product: any, index: number) => {
+                    return (
+                        <Card className='card' onClick={() => {
+                            selectProduct(product._id);
+                        }}>
+                            <CardActionArea className="action_area">
+                                <img src={product.img} alt="" className="media" />
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="h2" className="name">
+                                        {product.name}
+                                    </Typography>
+                                    <Typography variant="body2" color="textSecondary" component="p" className="coast">
+                                        <h1>{product.coast}</h1>
+                                    </Typography>
+                                </CardContent>
+                            </CardActionArea>
+                            <CardActions>
+                                <Button size="small" color="primary">
+                                    Share
+                      </Button>
+                                <Button size="small" color="primary">
+                                    Learn More
+                      </Button>
+                            </CardActions>
+                        </Card>
+                    );
 
-            });
-            setProducts(mas);
+                });
+                setProducts(mas);
+            }
         })
     })
     let categoryId = props.store.activeCategoryId;
     if (selectId) {
         return (
-            <Redirect from='shop' to={{ pathname: `/shop/:${selectId}` }} />
+            <Redirect from='shop' to={{ pathname: `/shop/${selectId}` }} />
         )
     };
     if (products) {
@@ -77,4 +80,4 @@ export const Catalog = observer((props: Props) => {
         )
     }
 
-});
+};

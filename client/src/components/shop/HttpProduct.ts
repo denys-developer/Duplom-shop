@@ -18,6 +18,16 @@ class httpProduct {
                 })
         })
     }
+    getDetails(id: string) {
+        return new Promise((resolve, reject) => {
+            axios.post(url + '/details', {
+                id: id
+            }).
+                then((response: any) => {
+                    resolve(response);
+                })
+        })
+    }
 }
 const http = new httpProduct();
 export default http;

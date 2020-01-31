@@ -6,6 +6,11 @@ router.get('/', (req, res) => {
         res.send(products);
     })
 });
+router.post('/details', (req, res) => {
+    product.getProductDetails(req.body.id).then((details) => {
+        res.send(details);
+    })
+})
 router.get('/categories', ((req, res) => {
     product.categories.then((categories) => {
         res.send(categories);

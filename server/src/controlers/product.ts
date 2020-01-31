@@ -13,13 +13,25 @@ class Product {
             }
         })
     }
-     getAllProducts() {
+    getAllProducts() {
         return new Promise((resolve, reject) => {
             try {
-                ProductDb.find({}, (err, products) => {
-                    resolve(products);
-                })
+
+                ProductDb.find({}, { _id: false }).populate('phones')
+                    .exec((err, products) => {
+                        resolve(products);
+                    })
             } catch (err) {
+                resolve(err);
+            }
+        })
+    }
+    getProductDetails(id: string) {
+        return new Promise((resolve, reject) => {
+            try {
+                resolve(id);
+            }
+            catch (err) {
                 resolve(err);
             }
         })
