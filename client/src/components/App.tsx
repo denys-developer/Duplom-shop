@@ -12,6 +12,7 @@ import Register from './auth/register/Register';
 import Shop from './shop/Shop';
 import AdminPanel from './shop/admin_panel/AdminPanel';
 import Card from './shop/product-card/Card';
+
 export default function App() {
     return (
         <>

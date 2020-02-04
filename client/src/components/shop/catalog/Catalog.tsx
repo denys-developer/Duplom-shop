@@ -63,8 +63,7 @@ export const Catalog = observer((props: Props) => {
         // })
     })
     let categoryId = props.store.activeCategoryId;
-    let a = props.store.products;
-    console.log(a);
+   
     if (selectId) {
         return (
             <Redirect from='shop' to={{ pathname: `/shop/${selectId}` }} />

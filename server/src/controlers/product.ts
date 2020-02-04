@@ -18,7 +18,7 @@ class Product {
         return new Promise((resolve, reject) => {
             try {
 
-                ProductDb.findOne({}, { _id: false }).populate(['laptop','phones'])
+                ProductDb.find({}, { _id: false }).populate(['laptop','phones'])
                     .exec((err, products) => {              
                         resolve(products);
                     })

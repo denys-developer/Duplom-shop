@@ -10,7 +10,7 @@ export default class Store {
     setProducts() {
         http.products().then((response) => {
             this.products = response;
-            console.log(response);
+            console.log(this.products[0]);
         })
 
     }
@@ -22,6 +22,7 @@ export default class Store {
     }
     set categoryId(id: number) {
         this.activeCategoryId = id;
+
 
     }
 }
