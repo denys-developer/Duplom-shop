@@ -1,4 +1,4 @@
 {
-    "port":8080,
-    "dbUrl":"mongodb+srv://denys:0902@cluster0-tgcyd.azure.mongodb.net/mern?retryWrites=true&w=majority"
+    "port":80,
+    "productDbUrl":"mongodb+srv://denys:1234@cluster0-aritm.mongodb.net/products-duplom?retryWrites=true&w=majority"
 }

@@ -1,30 +1,27 @@
-import React from 'react'
-import Button from '@material-ui/core/Button'
-import Box from '@material-ui/core/Box'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import Typography from '@material-ui/core/Typography'
-import TextField from '@material-ui/core/TextField'
-import Paper from '@material-ui/core/Paper'
+import React from 'react';
+import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
 import { useForm } from 'react-hook-form';
-import http from '../HttpAuth'
+import http from '../HttpAuth';
 import { connect } from 'react-redux';
 import { useStyles } from './style';
-import { Redirect } from 'react-router-dom'
-import * as actions from '../../../actions';
-import { bindActionCreators } from 'redux'
+import { Redirect } from 'react-router-dom';
+import * as actions from '../../../redux/actions';
+import { bindActionCreators } from 'redux';
 
-interface AuthDate {
-    email: String;
-    password: String;
-}
+
 interface Props {
     authStatus: boolean;
     setAuthState: (arg: boolean) => any;
 }
 const Login = (props: Props) => {
     const classes = useStyles({})
-    const { register, handleSubmit, watch, errors } = useForm()
-    const [formData, setFormData] = React.useState({ email: '', password: '' })
+    const { register, handleSubmit, watch, errors } = useForm();
+    const [formData, setFormData] = React.useState({ email: '', password: '' });
     const [submitting, setSubmitting] = React.useState(false)
     const onSubmit = (date: any) => {
         http.login(date).then((status) => {
@@ -103,16 +100,19 @@ const Login = (props: Props) => {
             </Paper>
         </main>
     )
-}
+};
+
 const mapStateToProps = (state: any) => {
     return {
         authStatus: state.auth
     }
 };
+
 const mapDispatchToProps = (dispatch: any) => {
     const { setAuthState } = bindActionCreators(actions, dispatch);
     return {
         setAuthState
     }
-}
+};
+
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -15,7 +15,8 @@ class HashPassword {
                 });
             });
         })
-    }
+    };
+
     checkPassword(password: string, user: UserDate) {
         return new Promise<boolean>((resolve, reject) => {
             bcrypt.compare(password, user.password, function (err: any, res: any) {
@@ -27,4 +28,5 @@ class HashPassword {
         });
     }
 }
+
 export = new HashPassword();

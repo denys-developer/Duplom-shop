@@ -1,19 +1,26 @@
 import express from 'express';
-import product from '../controlers/product';
+import Laptop from "../models/Laptop";
 const router = express.Router();
+
 router.get('/', (req, res) => {
-    product.getAllProducts().then((products) => {
-        res.send(products);
-    })
+ let products:any = [];
+ Laptop.find({},(err,array) => {
+   array.forEach((item:any) =>{
+      let obj = {
+      name: item.name,
+      id: item._id,
+      img: item.img
+      };
+    products.push(obj);
+   })
+  res.send(products);
+ });
+
+ router.post('/', (req,res) => {
+   Laptop.findById(req.body.id,(err,result) => {
+     res.send(result);
+   });
+ });
 });
-router.post('/details', (req, res) => {
-    product.getProductDetails(req.body.id).then((details) => {
-        res.send(details);
-    })
-})
-router.get('/categories', ((req, res) => {
-    product.categories.then((categories) => {
-        res.send(categories);
-    });
-}));
-export = router;
+
+module.exports = router;
